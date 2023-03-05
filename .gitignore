@@ -1,0 +1,10 @@
+# build and environment clutter
+__pycache__/
+venv/
+.DS_Store
+
+# environment files
+.env*
+
+# terraform files
+*/*.terraform

@@ -1,0 +1,587 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Starlite API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
+    "paths": {
+        "/trees/{species_name}": {
+            "get": {
+                "operationId": "TreesGetDescription",
+                "parameters": [
+                    {
+                        "name": "species_name",
+                        "in": "path",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request fulfilled, document follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/photo/user-entry": {
+            "post": {
+                "operationId": "PhotoUser-EntryPostUserEntry",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserPhotoPointFeature"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/geo+json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/photo/user-photo/{id}": {
+            "post": {
+                "operationId": "PhotoUser-PhotoPostUserPhoto",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "allowReserved": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Document created, URL follows",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request syntax or unsupported method",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "extra": {
+                                            "additionalProperties": {},
+                                            "type": [
+                                                "null",
+                                                "object",
+                                                "array"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "detail",
+                                        "status_code"
+                                    ],
+                                    "description": "Validation Exception",
+                                    "examples": [
+                                        {
+                                            "status_code": 400,
+                                            "detail": "Bad Request",
+                                            "extra": {}
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PointModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "Point",
+                        "title": "Point",
+                        "default": "Point"
+                    },
+                    "coordinates": {
+                        "items": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "integer"
+                                    }
+                                ],
+                                "title": "Coordinate longitude"
+                            },
+                            {
+                                "anyOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "integer"
+                                    }
+                                ],
+                                "title": "Coordinate latitude"
+                            }
+                        ],
+                        "type": "array",
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "PointModel"
+            },
+            "MultiPointModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "MultiPoint",
+                        "title": "Multi Point",
+                        "default": "MultiPoint"
+                    },
+                    "coordinates": {
+                        "items": {
+                            "items": [
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "integer"
+                                        }
+                                    ],
+                                    "title": "Coordinate longitude"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "integer"
+                                        }
+                                    ],
+                                    "title": "Coordinate latitude"
+                                }
+                            ],
+                            "type": "array",
+                            "maxItems": 2,
+                            "minItems": 2
+                        },
+                        "type": "array",
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "MultiPointModel"
+            },
+            "LineStringModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "LineString",
+                        "title": "LineS String",
+                        "default": "LineString"
+                    },
+                    "coordinates": {
+                        "items": {
+                            "items": [
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "integer"
+                                        }
+                                    ],
+                                    "title": "Coordinate longitude"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "integer"
+                                        }
+                                    ],
+                                    "title": "Coordinate latitude"
+                                }
+                            ],
+                            "type": "array",
+                            "maxItems": 2,
+                            "minItems": 2
+                        },
+                        "type": "array",
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "LineStringModel"
+            },
+            "MultiLineStringModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "MultiLineString",
+                        "title": "Multi Line String",
+                        "default": "MultiLineString"
+                    },
+                    "coordinates": {
+                        "items": {
+                            "items": {
+                                "items": [
+                                    {
+                                        "anyOf": [
+                                            {
+                                                "type": "number"
+                                            },
+                                            {
+                                                "type": "integer"
+                                            }
+                                        ],
+                                        "title": "Coordinate longitude"
+                                    },
+                                    {
+                                        "anyOf": [
+                                            {
+                                                "type": "number"
+                                            },
+                                            {
+                                                "type": "integer"
+                                            }
+                                        ],
+                                        "title": "Coordinate latitude"
+                                    }
+                                ],
+                                "type": "array",
+                                "maxItems": 2,
+                                "minItems": 2
+                            },
+                            "type": "array"
+                        },
+                        "type": "array",
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "MultiLineStringModel"
+            },
+            "PolygonModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "Polygon",
+                        "title": "Polygon",
+                        "default": "Polygon"
+                    },
+                    "coordinates": {
+                        "items": {
+                            "items": {
+                                "items": [
+                                    {
+                                        "anyOf": [
+                                            {
+                                                "type": "number"
+                                            },
+                                            {
+                                                "type": "integer"
+                                            }
+                                        ],
+                                        "title": "Coordinate longitude"
+                                    },
+                                    {
+                                        "anyOf": [
+                                            {
+                                                "type": "number"
+                                            },
+                                            {
+                                                "type": "integer"
+                                            }
+                                        ],
+                                        "title": "Coordinate latitude"
+                                    }
+                                ],
+                                "type": "array",
+                                "maxItems": 2,
+                                "minItems": 2
+                            },
+                            "type": "array"
+                        },
+                        "type": "array",
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "PolygonModel"
+            },
+            "MultiPolygonModel": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "MultiPolygon",
+                        "title": "Multi Polygon",
+                        "default": "MultiPolygon"
+                    },
+                    "coordinates": {
+                        "items": {
+                            "items": {
+                                "items": {
+                                    "items": [
+                                        {
+                                            "anyOf": [
+                                                {
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ],
+                                            "title": "Coordinate longitude"
+                                        },
+                                        {
+                                            "anyOf": [
+                                                {
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ],
+                                            "title": "Coordinate latitude"
+                                        }
+                                    ],
+                                    "type": "array",
+                                    "maxItems": 2,
+                                    "minItems": 2
+                                },
+                                "type": "array"
+                            },
+                            "type": "array"
+                        },
+                        "type": "array",
+                        "title": "Coordinates"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "coordinates"
+                ],
+                "title": "MultiPolygonModel"
+            },
+            "UserPhotoResponse": {
+                "properties": {
+                    "created_at_utc": {
+                        "type": "string",
+                        "title": "Created At Utc"
+                    },
+                    "public_id": {
+                        "type": "string",
+                        "title": "Public Id"
+                    },
+                    "url": {
+                        "type": "string",
+                        "title": "Url"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created_at_utc",
+                    "public_id",
+                    "url"
+                ],
+                "title": "UserPhotoResponse"
+            },
+            "UserPhotoPointFeature": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "Feature",
+                        "title": "Feature",
+                        "default": "Feature"
+                    },
+                    "geometry": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PointModel"
+                            },
+                            {
+                                "$ref": "#/components/schemas/MultiPointModel"
+                            },
+                            {
+                                "$ref": "#/components/schemas/LineStringModel"
+                            },
+                            {
+                                "$ref": "#/components/schemas/MultiLineStringModel"
+                            },
+                            {
+                                "$ref": "#/components/schemas/PolygonModel"
+                            },
+                            {
+                                "$ref": "#/components/schemas/MultiPolygonModel"
+                            }
+                        ],
+                        "title": "Geometry"
+                    },
+                    "properties": {
+                        "$ref": "#/components/schemas/UserPhotoResponse"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "geometry",
+                    "properties"
+                ],
+                "title": "UserPhotoPointFeature"
+            }
+        }
+    }
+}
