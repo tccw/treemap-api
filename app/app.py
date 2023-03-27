@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 import cloudinary
 import os
-from controllers.openapi_controller import MyOpenAPIController
 
 from controllers.controllers import PhotoController
 
