@@ -1,3 +1,3 @@
-from controllers.openapi_controller import MyOpenAPIController
-from controllers.tree_controller import TreeController
-from controllers.photo_controller import PhotoController
+from app.controllers.openapi_controller import MyOpenAPIController
+from app.controllers.tree_controller import TreeController
+from app.controllers.photo_controller import PhotoController

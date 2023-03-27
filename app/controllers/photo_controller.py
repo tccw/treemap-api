@@ -30,13 +30,13 @@ from pymongo.collection import Collection
 import cloudinary.uploader
 from PIL import Image, UnidentifiedImageError
 from dotenv import load_dotenv
-from models.exceptions import (
+from app.models.exceptions import (
     raise_unprocessable_entity_response,
     raise_bad_request_response,
     raise_server_error_response,
 )
-from models.requests import UserPhotoPointFeature, UserPhotoPostRequest
-from models.responses import ResponseModel
+from app.models.requests import UserPhotoPointFeature, UserPhotoPostRequest
+from app.models.responses import ResponseModel
 from pydantic_geojson import FeatureCollectionModel
 
 

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import cloudinary
 import os
 
-from controllers.controllers import PhotoController
+from app.controllers.controllers import PhotoController
 
 load_dotenv()
 
