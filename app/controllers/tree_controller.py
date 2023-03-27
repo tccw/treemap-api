@@ -8,10 +8,6 @@ from starlite import (
 class TreeController(Controller):
     path = "/trees"
 
-    async def parse_body(request: Request):
-        data: bytes = await request.body()
-        return data
-
     @get(path="/{species_name:str}")
     async def get_description(
         self, request: Request, species_name: str
