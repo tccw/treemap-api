@@ -44,7 +44,7 @@ app = Starlite(
     #     allowed_hosts=["*"]
     # ),
     # disabling OpenAPI docs until this issue is resolved: https://github.com/pydantic/pydantic/issues/3210
-    # openapi_config=None
+    openapi_config=None
     # openapi_config=OpenAPIConfig(
     #     title="Treemap API", version="0.1.0", openapi_controller=MyOpenAPIController
     # ),
