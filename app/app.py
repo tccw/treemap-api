@@ -1,4 +1,4 @@
-from starlite import AllowedHostsConfig, CORSConfig, OpenAPIConfig, Starlite, LoggingConfig
+from starlite import AllowedHostsConfig, CORSConfig, MissingDependencyException, OpenAPIConfig, Starlite, LoggingConfig
 from starlite.middleware import RateLimitConfig
 from dotenv import load_dotenv
 
@@ -50,3 +50,11 @@ app = Starlite(
         title="Treemap API", version="0.1.0", openapi_controller=MyOpenAPIController
     ),
 )
+
+if __name__ == "__main__":
+    try:
+        import uvicorn
+
+        uvicorn.run(app)
+    except ImportError as e:
+        raise MissingDependencyException("uvicorn is not installed") from e
