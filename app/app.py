@@ -1,4 +1,4 @@
-from starlite import AllowedHostsConfig, CORSConfig, MissingDependencyException, OpenAPIConfig, Starlite, LoggingConfig
+from starlite import AllowedHostsConfig, CORSConfig, MissingDependencyException, Starlite, LoggingConfig
 from starlite.middleware import RateLimitConfig
 from dotenv import load_dotenv
 
@@ -46,9 +46,9 @@ app = Starlite(
     # ),
     # disabling OpenAPI docs until this issue is resolved: https://github.com/pydantic/pydantic/issues/3210
     # openapi_config=None
-    openapi_config=OpenAPIConfig(
-        title="Treemap API", version="0.1.0", openapi_controller=MyOpenAPIController
-    ),
+    # openapi_config=OpenAPIConfig(
+    #     title="Treemap API", version="0.1.0", openapi_controller=MyOpenAPIController
+    # ),
 )
 
 if __name__ == "__app__":

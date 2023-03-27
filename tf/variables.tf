@@ -47,7 +47,13 @@ variable "CROSS_ORIGIN_DOMAIN" {
 }
 
 variable "TIME_OFFSET_DAYS" {
-    type = string
-    description = "Default lifetime of user photos"
-    sensitive = false
+  type        = string
+  description = "Default lifetime of user photos"
+  sensitive   = false
+}
+
+variable "SCM_DO_BUILD_DURING_DEPLOYMENT" {
+  type        = string
+  description = "Does the app need to be built before deploying"
+  sensitive   = false
 }
