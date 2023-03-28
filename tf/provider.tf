@@ -34,6 +34,7 @@ resource "azurerm_linux_web_app" "treemap" {
     cors {
       allowed_origins = [var.CROSS_ORIGIN_DOMAIN]
     }
+    app_command_line  = "uvicorn app.app:app --reload"
   }
 
   app_settings = {
