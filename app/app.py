@@ -50,10 +50,10 @@ app = Starlite(
     # ),
 )
 
-if __name__ == "__app__":
-    try:
-        import uvicorn
+# if __name__ == "__app__":
+#     try:
+#         import uvicorn
 
-        uvicorn.run(app)
-    except ImportError as e:
-        raise MissingDependencyException("uvicorn is not installed") from e
+#         uvicorn.run(app)
+#     except ImportError as e:
+#         raise MissingDependencyException("uvicorn is not installed") from e
