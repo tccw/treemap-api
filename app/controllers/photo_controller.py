@@ -90,7 +90,7 @@ class PhotoController(Controller):
         collection: Collection,
         moderator: ContentModeratorClient,
         data: UserPhotoPostRequest = Body(media_type=RequestEncodingType.MULTI_PART),
-    ) -> dict:
+    ) -> ResponseModel:
         (feature, image_byes) = await self.validate_request(data, request, moderator)
 
         upload_result = cloudinary.uploader.upload(
@@ -116,7 +116,7 @@ class PhotoController(Controller):
             )
 
             if result.acknowledged:
-                return {
+                resultEntry = {
                     "type": feature.type,
                     "geometry": {
                         "type": feature.geometry.type,
@@ -127,6 +127,8 @@ class PhotoController(Controller):
                         **{"_id": str(result.inserted_id)},
                     },
                 }
+                return ResponseModel(type="object", data=resultEntry)
+
         except (InvalidOperation, TypeError, AttributeError) as e:
             request.logger.error(f"Write request failed: {e}")
             request.logger.info(

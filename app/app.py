@@ -1,4 +1,4 @@
-from starlite import AllowedHostsConfig, CORSConfig, MissingDependencyException, Starlite, LoggingConfig
+from starlite import CORSConfig, Starlite, LoggingConfig
 from starlite.middleware import RateLimitConfig
 from dotenv import load_dotenv
 
@@ -40,20 +40,5 @@ app = Starlite(
     logging_config=logging_config,
     middleware=[rate_limit_config.middleware],
     cors_config=CORSConfig(allow_origins=['*']),
-    # allowed_hosts=AllowedHostsConfig(
-    #     allowed_hosts=["*"]
-    # ),
-    # disabling OpenAPI docs until this issue is resolved: https://github.com/pydantic/pydantic/issues/3210
     openapi_config=None
-    # openapi_config=OpenAPIConfig(
-    #     title="Treemap API", version="0.1.0", openapi_controller=MyOpenAPIController
-    # ),
 )
-
-# if __name__ == "__app__":
-#     try:
-#         import uvicorn
-
-#         uvicorn.run(app)
-#     except ImportError as e:
-#         raise MissingDependencyException("uvicorn is not installed") from e
