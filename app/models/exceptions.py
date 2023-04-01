@@ -18,3 +18,10 @@ def raise_unprocessable_entity_response(detail: str):
         status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
         detail=detail,
     )
+
+
+def raise_locked_resource_response(detail: str):
+    raise HTTPException(
+        status_code=HTTPStatus.LOCKED,
+        detail=detail
+    )

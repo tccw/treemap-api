@@ -31,6 +31,7 @@ import cloudinary.uploader
 from PIL import Image, UnidentifiedImageError
 from dotenv import load_dotenv
 from app.models.exceptions import (
+    raise_locked_resource_response,
     raise_unprocessable_entity_response,
     raise_bad_request_response,
     raise_server_error_response,
@@ -49,6 +50,7 @@ MIN_IMAGE_DIM = 128
 USER_PHOTO_TAG = "user-photos"
 CLOUDINARY_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"  # e.g. 2017-08-11T12:24:32Z
 DAYS = int(os.getenv("TIME_OFFSET_DAYS", 14))
+USER_PHOTOS_ENABLED = (os.getenv("USER_PHOTOS_ENABLED", "false").lower() == "true")
 
 
 # https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/quickstart-python?tabs=azure-cli%2Cvenv-windows%2Cwindows#authenticate-the-client
@@ -91,6 +93,9 @@ class PhotoController(Controller):
         moderator: ContentModeratorClient,
         data: UserPhotoPostRequest = Body(media_type=RequestEncodingType.MULTI_PART),
     ) -> ResponseModel:
+        if not USER_PHOTOS_ENABLED:
+            raise_locked_resource_response("User photos are temporarily disabled.")
+
         (feature, image_byes) = await self.validate_request(data, request, moderator)
 
         upload_result = cloudinary.uploader.upload(
@@ -150,6 +155,9 @@ class PhotoController(Controller):
         Returns:
             GetResponse: A FeatureCollection of all user photos within the last two weeks
         """
+        if not USER_PHOTOS_ENABLED:
+            raise_locked_resource_response("User photos are temporarily disabled.")
+
         offset_time = datetime.datetime.utcnow() - datetime.timedelta(days=DAYS)
         two_weeks_ago_query = {"properties.created_at_utc": {"$gt": offset_time}}
         result: List[UserPhotoPointFeature] = [
