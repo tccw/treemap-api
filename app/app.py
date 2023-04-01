@@ -39,6 +39,7 @@ app = Starlite(
     route_handlers=[PhotoController],
     logging_config=logging_config,
     middleware=[rate_limit_config.middleware],
-    cors_config=CORSConfig(allow_origins=['*']),
+    cors_config=cors_config,
+    # cors_config=CORSConfig(allow_origins=['*']),
     openapi_config=None
 )
